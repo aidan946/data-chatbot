@@ -4,25 +4,27 @@ import { defineRoute } from "$fresh/server.ts";
 
 export default defineRoute<State>((_req, ctx) => {
   const isSignedIn = ctx.state.sessionUser !== undefined;
-  const endpoint = "/api/items";
 
   return (
     <>
-      <Head href={ctx.url.href}>
-        <link
-          as="fetch"
-          crossOrigin="anonymous"
-          href={endpoint}
-          rel="preload"
-        />
-        {isSignedIn && (
-          <link
-            as="fetch"
-            crossOrigin="anonymous"
-            rel="preload"
-          />
-        )}
-      </Head>
+      <Head title="Home" href={ctx.url.href} />
+      <main class="p-4">
+        <div>Test</div>
+        {isSignedIn
+          ? (
+            <a
+              href="/account"
+              class="link-styles nav-item"
+            >
+              Account
+            </a>
+          )
+          : (
+            <a href="/signin" class="link-styles nav-item">
+              Sign in
+            </a>
+          )}
+      </main>
     </>
   );
 });

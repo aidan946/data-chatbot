@@ -1,6 +1,6 @@
-import Header from "@/components/Header.tsx";
 import type { State } from "@/plugins/session.ts";
 import { defineApp } from "$fresh/server.ts";
+import SideMenu from "@/components/SideMenu.tsx";
 
 export default defineApp<State>((_, ctx) => {
   return (
@@ -12,11 +12,8 @@ export default defineApp<State>((_, ctx) => {
       </head>
       <body>
         <div>
-          <div class="flex flex-col min-h-screen mx-auto max-w-7xl w-full">
-            <Header
-              url={ctx.url}
-              sessionUser={ctx.state?.sessionUser}
-            />
+          <div class="flex min-h-screen mx-auto w-full">
+            <SideMenu />
             <ctx.Component />
           </div>
         </div>
