@@ -1,25 +1,37 @@
-import { useSignal } from "@preact/signals";
-import Counter from "../islands/Counter.tsx";
+// Copyright 2023-2024 the Deno authors. All rights reserved. MIT license.
+import type { State } from "@/plugins/session.ts";
+import Head from "@/components/Head.tsx";
+import ItemsList from "@/islands/ItemsList.tsx";
+import { defineRoute } from "$fresh/server.ts";
 
-export default function Home() {
-  const count = useSignal(3);
+export default defineRoute<State>((_req, ctx) => {
+  const isSignedIn = ctx.state.sessionUser !== undefined;
+  const endpoint = "/api/items";
+
   return (
-    <div class="px-4 py-8 mx-auto bg-[#86efac]">
-      <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <img
-          class="my-6"
-          src="/logo.svg"
-          width="128"
-          height="128"
-          alt="the Fresh logo: a sliced lemon dripping with juice"
+    <>
+      <Head href={ctx.url.href}>
+        <link
+          as="fetch"
+          crossOrigin="anonymous"
+          href={endpoint}
+          rel="preload"
         />
-        <h1 class="text-4xl font-bold">Welcome to Fresh</h1>
-        <p class="my-4">
-          Try updating this message in the
-          <code class="mx-2">./routes/index.tsx</code> file, and refresh.
-        </p>
-        <Counter count={count} />
-      </div>
-    </div>
+        {isSignedIn && (
+          <link
+            as="fetch"
+            crossOrigin="anonymous"
+            href="/api/me/votes"
+            rel="preload"
+          />
+        )}
+      </Head>
+      <main class="flex-1 p-4">
+        <ItemsList
+          endpoint={endpoint}
+          isSignedIn={isSignedIn}
+        />
+      </main>
+    </>
   );
-}
+});
