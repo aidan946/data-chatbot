@@ -1,4 +1,3 @@
-// Copyright 2023-2024 the Deno authors. All rights reserved. MIT license.
 import { defineRoute } from "$fresh/src/server/defines.ts";
 import Head from "@/components/Head.tsx";
 import { isGitHubSetup } from "@/utils/github.ts";

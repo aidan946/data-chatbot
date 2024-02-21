@@ -1,4 +1,3 @@
-// Copyright 2023-2024 the Deno authors. All rights reserved. MIT license.
 /**
  * This script prints all entries in the KV database formatted as JSON. This
  * can be used to create a backup file.

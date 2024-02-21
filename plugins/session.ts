@@ -1,4 +1,3 @@
-// Copyright 2023-2024 the Deno authors. All rights reserved. MIT license.
 import { Plugin } from "$fresh/server.ts";
 import type { FreshContext } from "$fresh/server.ts";
 import { getSessionId } from "kv_oauth/mod.ts";
@@ -78,10 +77,6 @@ export default {
     },
     {
       path: "/api/me",
-      middleware: { handler: ensureSignedIn },
-    },
-    {
-      path: "/api/vote",
       middleware: { handler: ensureSignedIn },
     },
   ],

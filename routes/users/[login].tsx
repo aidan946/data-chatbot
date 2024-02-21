@@ -1,12 +1,9 @@
-// Copyright 2023-2024 the Deno authors. All rights reserved. MIT license.
 import type { State } from "@/plugins/session.ts";
 import { getUser } from "@/utils/db.ts";
 import IconBrandGithub from "tabler_icons_tsx/brand-github.tsx";
 import Head from "@/components/Head.tsx";
 import GitHubAvatarImg from "@/components/GitHubAvatarImg.tsx";
-import ItemsList from "@/islands/ItemsList.tsx";
 import { defineRoute } from "$fresh/server.ts";
-import { PremiumBadge } from "@/components/PremiumBadge.tsx";
 
 interface UserProfileProps {
   login: string;
@@ -21,7 +18,6 @@ function UserProfile(props: UserProfileProps) {
         <div class="font-semibold text-xl">
           {props.login}
         </div>
-        {props.isSubscribed && <PremiumBadge class="size-6 inline" />}
         <a
           href={`https://github.com/${props.login}`}
           aria-label={`${props.login}'s GitHub profile`}
@@ -66,10 +62,6 @@ export default defineRoute<State>(
           <div class="flex justify-center p-4">
             <UserProfile {...user} />
           </div>
-          <ItemsList
-            endpoint={endpoint}
-            isSignedIn={isSignedIn}
-          />
         </main>
       </>
     );

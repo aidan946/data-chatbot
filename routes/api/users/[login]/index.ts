@@ -1,4 +1,3 @@
-// Copyright 2023-2024 the Deno authors. All rights reserved. MIT license.
 import type { Handlers } from "$fresh/server.ts";
 import { getUser } from "@/utils/db.ts";
 

@@ -1,4 +1,3 @@
-// Copyright 2023-2024 the Deno authors. All rights reserved. MIT license.
 import { kv } from "@/utils/db.ts";
 
 if (!confirm("WARNING: The database will be reset. Continue?")) Deno.exit();

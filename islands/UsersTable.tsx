@@ -1,10 +1,8 @@
-// Copyright 2023-2024 the Deno authors. All rights reserved. MIT license.
 import { useSignal } from "@preact/signals";
 import { useEffect } from "preact/hooks";
 import type { User } from "@/utils/db.ts";
 import GitHubAvatarImg from "@/components/GitHubAvatarImg.tsx";
 import { fetchValues } from "@/utils/http.ts";
-import { PremiumBadge } from "@/components/PremiumBadge.tsx";
 
 const TH_STYLES = "p-4 text-left";
 const TD_STYLES = "p-4";
@@ -22,13 +20,6 @@ function UserTableRow(props: User) {
         </a>
       </td>
       <td scope="col" class={TD_STYLES + " text-gray-500"}>
-        {props.isSubscribed
-          ? (
-            <>
-              Premium <PremiumBadge class="size-5 inline" />
-            </>
-          )
-          : "Basic"}
       </td>
       <td scope="col" class={TD_STYLES + " text-gray-500"}>
         ${(Math.random() * 100).toFixed(2)}
@@ -74,8 +65,6 @@ export default function UsersTable(props: UsersTableProps) {
         <thead class="border-b border-gray-300">
           <tr>
             <th scope="col" class={TH_STYLES}>User</th>
-            <th scope="col" class={TH_STYLES}>Subscription</th>
-            <th scope="col" class={TH_STYLES}>Revenue</th>
           </tr>
         </thead>
         <tbody>
