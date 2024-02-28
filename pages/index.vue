@@ -1,58 +1,24 @@
 <script setup lang="ts">
-import type { FormError } from '#ui/types'
-
-const fields = [{
-    name: 'email',
-    type: 'text',
-    label: 'Email',
-    placeholder: 'Enter your email'
-}, {
-    name: 'password',
-    label: 'Password',
-    type: 'password',
-    placeholder: 'Enter your password'
-}]
-
-const validate = (state: any) => {
-    const errors: FormError[] = []
-    if (!state.email) errors.push({ path: 'email', message: 'Email is required' })
-    if (!state.password) errors.push({ path: 'password', message: 'Password is required' })
-    return errors
-}
-
-const providers = [{
-    label: 'Continue with GitHub',
-    icon: 'i-simple-icons-github',
-    color: 'white' as const,
-    click: () => {
-        console.log('Redirect to GitHub')
-    }
-}]
-
+definePageMeta({
+  layout: 'login'
+})
 function onSubmit(data: any) {
-    console.log('Submitted', data)
+  console.log('Submitted', data)
 }
 </script>
 
-<!-- eslint-disable vue/multiline-html-element-content-newline -->
-<!-- eslint-disable vue/singleline-html-element-content-newline -->
 <template>
-    <Theme />
-    <UCard class="max-w-sm w-full">
-        <UAuthForm :fields="fields" :validate="validate" :providers="providers" title="Welcome back!" align="top"
-            icon="i-heroicons-lock-closed" :ui="{ base: 'text-center', footer: 'text-center' }" @submit="onSubmit">
-            <template #description>
-                Don't have an account? <NuxtLink to="/" class="text-primary font-medium">Sign up</NuxtLink>.
-            </template>
-
-            <template #password-hint>
-                <NuxtLink to="/" class="text-primary font-medium">Forgot password?</NuxtLink>
-            </template>
-
-            <template #footer>
-                By signing in, you agree to our <NuxtLink to="/" class="text-primary font-medium">Terms of Service
-                </NuxtLink>.
-            </template>
-        </UAuthForm>
-    </UCard>
+  <div class="flex border rounded-lg max-w-3xl p-8 ml-auto mr-auto shadow-lg content-center">
+    <div class="mr-4">
+      <h1 class="text-3xl font-bold">Data Bot</h1>
+      <p>A bot to allow you to best interact with your data. Ask me anything and I will help you the best with what I know
+        and any data you give me.</p>
+    </div>
+    <div class="ml-4">
+      <p>Have an account?</p>
+      <UButton to="/login" class="w-32 justify-center" color="primary" variant="solid">Login</UButton>
+      <p>Don't have an account?</p>
+      <UButton to="/register" class="w-32 justify-center" color="primary" variant="solid">Sign Up</UButton>
+    </div>
+  </div>
 </template>
